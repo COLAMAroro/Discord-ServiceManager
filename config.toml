@@ -1,0 +1,16 @@
+﻿[config]
+
+#Enter your token here
+token = "Your Token"
+
+#Choose your command to trigger the bot. Use "@" for mention
+command = "@"
+
+#Exemples of services. Use User ID of user to add to the whishlist
+#The subsection is name to be used by the bot to call
+#I **HIGHLY** Advise to NOT integrate this specific bot in this config. It's not tested, and it's not supposed to be a suicide box
+[services]
+	[services.example]
+		service_name = "someservicename" #The windows name of the service (Not his name ! His real name. Check the serivce properties to get it if you don't know it)
+		display_name = "howyouwannacallit" #The name which you want to call the service from. is your command is @, here you call it by @BOT start howyouwannacallit
+		whitelist = [128819350088974336] #A comma separeted list of users allowed to change the state of a service
