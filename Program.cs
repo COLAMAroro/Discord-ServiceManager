@@ -81,18 +81,19 @@ namespace Discord_ServiceManager
             {
                 try
                 {
-                    mention = "<@!" + _client.CurrentUser.Id.ToString() + ">";
+                    mention = $"<@{_client.CurrentUser.Id}>";
                 }
                 catch (Exception e)
                 {
                     Console.Error.WriteLine("Error: Could not get the user id");
-                    throw e;
+                    throw;
                 }
             }
             else
             {
                 mention = myConf.command;
             }
+            Console.WriteLine($"Mention is ${mention}");
             return Task.CompletedTask;
         }
 
