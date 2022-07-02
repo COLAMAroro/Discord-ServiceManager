@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.Threading.Tasks;
 using System.Security.Principal;
+using System.Linq;
 
 namespace Discord_ServiceManager
 {
@@ -79,15 +80,7 @@ namespace Discord_ServiceManager
 
             if (myConf.command == "@")
             {
-                try
-                {
-                    mention = $"<@{_client.CurrentUser.Id}>";
-                }
-                catch (Exception e)
-                {
-                    Console.Error.WriteLine("Error: Could not get the user id");
-                    throw;
-                }
+                mention = null;
             }
             else
             {
@@ -105,8 +98,15 @@ namespace Discord_ServiceManager
             if (message.Author.Id == _client.CurrentUser.Id)
                 return;
 
-            if (message.Content.StartsWith(mention))
+            if (mention == null && message.MentionedUsers.Select(u => u.Id).Contains(_client.CurrentUser.Id))
+            {
                 MessageProcess.Process(message, myConf);
+                return;
+            } else if (message.Content.StartsWith(mention))
+            {
+                MessageProcess.Process(message, myConf);
+                return;
+            }
         }
     }
 }
